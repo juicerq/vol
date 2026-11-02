@@ -2,7 +2,24 @@ import { defineConfig } from "wxt";
 
 export default defineConfig({
   srcDir: "src",
-  zip: { excludeSources: ["output/**"] },
+  zip: {
+    dotSources: true,
+    includeSources: [
+      "src/**",
+      "public/**",
+      "assets/**",
+      "docs/**",
+      "*.md",
+      "LICENSE",
+      "package.json",
+      "bun.lock",
+      "tsconfig.json",
+      "wxt.config.ts",
+      ".bun-version",
+      ".gitignore",
+      ".github/workflows/**",
+    ],
+  },
   modules: ["@wxt-dev/module-svelte"],
   svelte: { vite: { compilerOptions: { fragments: "tree" } } },
   manifest: {

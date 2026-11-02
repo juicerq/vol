@@ -10,7 +10,8 @@
     "xpi": "wxt zip -b firefox --mv3 && cp .output/vol-$npm_package_version-firefox.zip .output/vol.xpi",
     "check": "wxt prepare && svelte-check --tsconfig ./tsconfig.json",
     "lint": "oxlint src",
-    "postinstall": "wxt prepare"
+    "postinstall": "wxt prepare",
+    "lint:extension": "web-ext lint --source-dir .output/firefox-mv3 --warnings-as-errors"
   },
   "dependencies": {
     "valibot": "^1.5.0"
@@ -23,5 +24,11 @@
     "typescript": "5.9.3",
     "web-ext": "^10.8.0",
     "wxt": "^0.21.5"
+  },
+  "description": "Volume independente por aba para Zen e Firefox, de 0% a 200%.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juicerq/vol.git"
   }
 }
