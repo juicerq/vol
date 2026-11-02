@@ -8,7 +8,7 @@ Reduza o som de uma aba, amplifique um vídeo em outra e mantenha cada uma no se
 
 ![Vol: cada aba no seu volume, com interface amarela e preta](docs/images/cover.png)
 
-[Baixar a última versão](https://github.com/juicerq/vol/releases/latest) · [Instalar](#instalar) · [Como funciona](#como-funciona) · [Desenvolver](#desenvolver)
+[Baixar a última versão](https://github.com/juicerq/vol/releases/latest) · [Instalar](#instalar) · [Como funciona](#como-funciona)
 
 ## Cada aba no seu volume
 
@@ -24,7 +24,7 @@ As imagens são ilustrações da interface baseadas no layout e nos recursos atu
 
 ## Instalar
 
-Os pacotes atuais **não têm assinatura da Mozilla**. A instalação permanente exige um navegador e uma configuração que aceitem extensões sem assinatura. O motor de áudio foi verificado no Firefox no desenvolvimento da v0.1.1; a instalação permanente no Zen ainda precisa ser validada.
+Os pacotes atuais **não têm assinatura da Mozilla**. A instalação permanente exige um navegador e uma configuração que aceitem extensões sem assinatura. O motor de áudio foi verificado no Firefox na v0.1.1; a instalação permanente no Zen ainda precisa ser validada.
 
 ### Pacote para Zen
 
@@ -36,9 +36,9 @@ A configuração relevante é `xpinstall.signatures.required` em `about:config`.
 
 ### Experimentar no Firefox ou Zen
 
-1. [Gere o pacote localmente](#desenvolver).
+1. Baixe o `.xpi` da [última release](https://github.com/juicerq/vol/releases/latest).
 2. Abra `about:debugging#/runtime/this-firefox` → **Carregar extensão temporária**.
-3. Selecione `.output/firefox-mv3/manifest.json`.
+3. Selecione o arquivo `.xpi` baixado.
 4. Abra uma página com áudio ou vídeo e ajuste o volume pelo ícone do Vol. Se a página já estava aberta, recarregue-a.
 
 A instalação temporária é removida ao reiniciar o navegador. As atualizações dos pacotes permanentes são manuais: baixe e instale o `.xpi` da nova release.
@@ -77,59 +77,7 @@ O manifesto requer Firefox 140 ou superior. A distribuição assinada e a valida
 
 O Vol não inclui analytics, anúncios ou chamadas a servidores externos. O percentual fica associado à sessão da aba pelo navegador. O acesso amplo aos sites permite aplicar o controle de áudio onde o usuário navegar.
 
-## Desenvolver
-
-Stack: **Bun · WXT · Svelte 5 · TypeScript · Valibot · Web Audio API**, com Manifest V3 para Firefox.
-
-Use a versão de Bun indicada em [.bun-version](.bun-version).
-
-```sh
-git clone https://github.com/juicerq/vol.git
-cd vol
-bun install --frozen-lockfile
-bun run dev
-```
-
-O modo de desenvolvimento abre o Firefox. Para usar um binário local do Zen, configure `web-ext.config.ts`, ignorado pelo Git:
-
-```ts
-import { defineWebExtConfig } from "wxt";
-
-export default defineWebExtConfig({
-  binaries: { firefox: "/caminho/para/zen" },
-});
-```
-
-Para gerar o pacote sem abrir o navegador:
-
-```sh
-bun run xpi
-```
-
-Saídas: `.output/firefox-mv3/` para instalação temporária e `.output/vol.xpi` para o pacote instalável sem assinatura.
-
-### Checagens
-
-```sh
-bun run check
-bun run lint
-bun run xpi
-bun run lint:extension
-```
-
-O [GitHub Actions](https://github.com/juicerq/vol/actions/workflows/ci.yml) executa essas checagens em pushes na `main` e em pull requests. Tags `v*` também passam pelas checagens e geram uma release em rascunho com o `.xpi` e o código-fonte.
-
-### Onde encontrar cada parte
-
-| Arquivo | Responsabilidade |
-| --- | --- |
-| [`popup/App.svelte`](src/entrypoints/popup/App.svelte) | Interface e controle da aba ativa. |
-| [`background.ts`](src/entrypoints/background.ts) | Validação, persistência e envio aos frames. |
-| [`volume.content.ts`](src/entrypoints/volume.content.ts) | Ponte entre a extensão e o contexto da página. |
-| [`audio.content.ts`](src/entrypoints/audio.content.ts) | Descoberta de players e processamento de áudio. |
-| [`lib/volume.ts`](src/lib/volume.ts) | Contratos das mensagens e limites do volume. |
-
-Veja [como contribuir](CONTRIBUTING.md) e [como preparar uma release](docs/RELEASING.md). Bugs podem ser reportados nas [issues](https://github.com/juicerq/vol/issues), com navegador, versão e passos para reproduzir.
+Bugs podem ser reportados nas [issues](https://github.com/juicerq/vol/issues), com navegador, versão e passos para reproduzir.
 
 ## Licença
 

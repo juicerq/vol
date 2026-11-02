@@ -2,7 +2,7 @@
 
 Para reportar um problema, abra uma [issue](https://github.com/juicerq/vol/issues) com navegador e versão, passos para reproduzir, resultado esperado e resultado observado. Se o problema depender de um player, inclua uma URL pública que permita reproduzi-lo, sem dados pessoais.
 
-Para alterar o código, siga a [preparação local](README.md#desenvolver) e abra um pull request explicando o problema e o comportamento resultante. Mudanças na interface devem incluir uma captura ou vídeo.
+Para alterar o código, abra um pull request explicando o problema e o comportamento resultante. Mudanças na interface devem incluir uma captura ou vídeo.
 
 Antes de enviar:
 
